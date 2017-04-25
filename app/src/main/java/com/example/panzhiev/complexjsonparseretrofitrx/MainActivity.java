@@ -2,13 +2,17 @@ package com.example.panzhiev.complexjsonparseretrofitrx;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+import com.example.panzhiev.complexjsonparseretrofitrx.adapters.NewsRecyclerAdapter;
+import com.example.panzhiev.complexjsonparseretrofitrx.model.ListOfNewsItems;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.NewsItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.adapter.rxjava.HttpException;
@@ -22,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String LOG_TAG = "MainActivity";
 
     private Button mButtonGetData;
-    private TextView mTextViewResponse;
+    private RecyclerView mRecyclerView;
+    List<NewsItem> mNewsItems;
+    NewsRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mButtonGetData = (Button) findViewById(R.id.button_get_data);
         mButtonGetData.setOnClickListener(this);
-        mTextViewResponse = (TextView) findViewById(R.id.text_view_response);
 
+        mNewsItems = new ArrayList<>();
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(llm);
 
+        adapter = new NewsRecyclerAdapter(this, (ArrayList) mNewsItems);
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -49,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void query() {
 
-        Observable<List<NewsItem>> observableNewsItems = App.getApi().getNewsItems();
+        Observable<ListOfNewsItems> observableNewsItems = App.getApi().getNewsItems("sjson");
 
         observableNewsItems.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<NewsItem>>() {
+                .subscribe(new Subscriber<ListOfNewsItems>() {
                     @Override
                     public void onCompleted() {
                         Log.d(LOG_TAG, " onCompleted()");
@@ -71,13 +83,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     @Override
-                    public void onNext(List<NewsItem> listNewsItems) {
+                    public void onNext(ListOfNewsItems listNewsItems) {
                         Log.d(LOG_TAG, listNewsItems.toString() + " response NewsItems");
 
-//                        Map map = gson.fromJson(object.toString(), Map.class);
-//                        String translation = map.get("text").toString();
-//                        translation = translation.replace("]", "").replace("[", "");
-//                        mEditText_first.setText(translation);
+                        mNewsItems = listNewsItems.getNewsItem();
+                        adapter.notifyDataSetChanged();
+
+                        for (NewsItem newsItem : mNewsItems){
+                            Log.d(LOG_TAG, newsItem.getHeadLine());
+                        }
                     }
                 });
     }

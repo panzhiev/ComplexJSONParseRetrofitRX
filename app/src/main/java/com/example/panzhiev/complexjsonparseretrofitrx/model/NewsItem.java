@@ -1,11 +1,11 @@
 package com.example.panzhiev.complexjsonparseretrofitrx.model;
 
-import android.media.Image;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class NewsItem {
+import java.io.Serializable;
+
+public class NewsItem implements Serializable {
 
     @SerializedName("NewsItemId")
     @Expose
@@ -28,9 +28,9 @@ public class NewsItem {
     @SerializedName("Caption")
     @Expose
     private String caption;
-    @SerializedName("Image")
+    @SerializedName("NewsImage")
     @Expose
-    private Image image;
+    private NewsImage newsImage;
     @SerializedName("Keywords")
     @Expose
     private String keywords;
@@ -103,12 +103,12 @@ public class NewsItem {
         this.caption = caption;
     }
 
-    public Image getImage() {
-        return image;
+    public NewsImage getNewsImage() {
+        return newsImage;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public NewsImage setNewsImage() {
+        return newsImage;
     }
 
     public String getKeywords() {

@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
 
 public class App extends Application {
 
-    private static TimesofindiaApi timesOfIndiaApi;
+    private static TimesOfIndiaApi timesOfIndiaApi;
     private Retrofit retrofit;
 
     @Override
@@ -31,10 +31,10 @@ public class App extends Application {
                 .addConverterFactory(GsonConverterFactory.create(gson)) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .addCallAdapterFactory(rxAdapter)
                 .build();
-        timesOfIndiaApi = retrofit.create(TimesofindiaApi.class); //Создаем объект, при помощи которого будем выполнять запросы
+        timesOfIndiaApi = retrofit.create(TimesOfIndiaApi.class); //Создаем объект, при помощи которого будем выполнять запросы
     }
 
-    public static TimesofindiaApi getApi() {
+    public static TimesOfIndiaApi getApi() {
         return timesOfIndiaApi;
     }
 }

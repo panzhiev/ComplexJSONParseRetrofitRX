@@ -1,9 +1,11 @@
 package com.example.panzhiev.complexjsonparseretrofitrx.model;
 
-        import com.google.gson.annotations.Expose;
-        import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Pagination {
+import java.io.Serializable;
+
+public class Pagination implements Serializable {
 
     @SerializedName("TotalPages")
     @Expose

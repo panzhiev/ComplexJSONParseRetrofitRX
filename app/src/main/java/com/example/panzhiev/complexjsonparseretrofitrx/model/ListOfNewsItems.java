@@ -7,15 +7,27 @@ import java.util.List;
 
 public class ListOfNewsItems {
 
+    @SerializedName("Pagination")
+    @Expose
+    private Pagination pagination;
     @SerializedName("NewsItem")
     @Expose
-    private List<NewsItem> listOfNewsItems = null;
+    private List<NewsItem> newsItems = null;
 
-    public List<NewsItem> getListOfNewsItems() {
-        return listOfNewsItems;
+    public Pagination getPagination() {
+        return pagination;
     }
 
-    public void setListOfNewsItems(List<NewsItem> listOfNewsItems) {
-        this.listOfNewsItems = listOfNewsItems;
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
     }
+
+    public List<NewsItem> getNewsItem() {
+        return newsItems;
+    }
+
+    public void setNewsItem(List<NewsItem> newsItems) {
+        this.newsItems = newsItems;
+    }
+
 }
