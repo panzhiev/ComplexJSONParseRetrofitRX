@@ -2,7 +2,7 @@ package com.example.panzhiev.complexjsonparseretrofitrx;
 
 import android.app.Application;
 
-import com.example.panzhiev.complexjsonparseretrofitrx.utils.AppConstants;
+import com.example.panzhiev.complexjsonparseretrofitrx.utils.Config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -27,7 +27,7 @@ public class App extends Application {
         super.onCreate();
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
         retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstants.BASE_URL) //Базовая часть адреса
+                .baseUrl(Config.BASE_URL) //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create(gson)) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .addCallAdapterFactory(rxAdapter)
                 .build();

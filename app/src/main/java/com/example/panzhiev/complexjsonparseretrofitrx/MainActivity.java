@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.panzhiev.complexjsonparseretrofitrx.adapters.NewsRecyclerAdapter;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.ListOfNewsItems;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.NewsItem;
+import com.example.panzhiev.complexjsonparseretrofitrx.utils.Config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void query() {
 
-        Observable<ListOfNewsItems> observableNewsItems = App.getApi().getNewsItems("sjson");
+        Observable<ListOfNewsItems> observableNewsItems = App.getApi().getNewsItems(Config.RESPONSE_TYPE_JSON);
 
         observableNewsItems.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
