@@ -9,18 +9,27 @@
     android:orientation="vertical"
     tools:context="com.example.panzhiev.complexjsonparseretrofitrx.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:elevation="10dp">
 
-    <Button
-        android:id="@+id/button_get_data"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Get Data"
-        android:layout_marginTop="20dp"/>
+        <Button
+            android:id="@+id/button_get_data"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_view"
+            android:text="Get News"/>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/text_view_list_select"
         android:id="@+id/recycler_view_person"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text_view_list_select"/>
 
 </LinearLayout>

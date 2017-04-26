@@ -28,7 +28,7 @@ public class NewsItem implements Serializable {
     @SerializedName("Caption")
     @Expose
     private String caption;
-    @SerializedName("NewsImage")
+    @SerializedName("Image")
     @Expose
     private NewsImage newsImage;
     @SerializedName("Keywords")
@@ -46,6 +46,22 @@ public class NewsItem implements Serializable {
     @SerializedName("Related")
     @Expose
     private String related;
+
+    public NewsItem(String newsItemId, String headLine, String byLine, String agency, String dateLine, String webURL, String caption, NewsImage newsImage, String keywords, String story, String commentCountUrl, String commentFeedUrl, String related) {
+        this.newsItemId = newsItemId;
+        this.headLine = headLine;
+        this.byLine = byLine;
+        this.agency = agency;
+        this.dateLine = dateLine;
+        this.webURL = webURL;
+        this.caption = caption;
+        this.newsImage = newsImage;
+        this.keywords = keywords;
+        this.story = story;
+        this.commentCountUrl = commentCountUrl;
+        this.commentFeedUrl = commentFeedUrl;
+        this.related = related;
+    }
 
     public String getNewsItemId() {
         return newsItemId;
@@ -107,8 +123,8 @@ public class NewsItem implements Serializable {
         return newsImage;
     }
 
-    public NewsImage setNewsImage() {
-        return newsImage;
+    public void setNewsImage(NewsImage newsImage) {
+        this.newsImage = newsImage;
     }
 
     public String getKeywords() {
@@ -149,5 +165,24 @@ public class NewsItem implements Serializable {
 
     public void setRelated(String related) {
         this.related = related;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsItem{" +
+                "newsItemId='" + newsItemId + '\'' +
+                ", headLine='" + headLine + '\'' +
+                ", byLine='" + byLine + '\'' +
+                ", agency='" + agency + '\'' +
+                ", dateLine='" + dateLine + '\'' +
+                ", webURL='" + webURL + '\'' +
+                ", caption='" + caption + '\'' +
+                ", newsImage=" + newsImage +
+                ", keywords='" + keywords + '\'' +
+                ", story='" + story + '\'' +
+                ", commentCountUrl='" + commentCountUrl + '\'' +
+                ", commentFeedUrl='" + commentFeedUrl + '\'' +
+                ", related='" + related + '\'' +
+                '}';
     }
 }

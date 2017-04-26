@@ -9,36 +9,51 @@ public class NewsImage implements Serializable{
 
     @SerializedName("Photo")
     @Expose
-    private String photo;
+    private String mPhoto;
     @SerializedName("Thumb")
     @Expose
-    private String thumb;
+    private String mThumb;
     @SerializedName("PhotoCaption")
     @Expose
-    private String photoCaption;
+    private String mPhotoCaption;
+
+    public NewsImage (String mPhoto, String mThumb, String mPhotoCaption) {
+        this.mPhoto = mPhoto;
+        this.mThumb = mThumb;
+        this.mPhotoCaption = mPhotoCaption;
+    }
 
     public String getPhoto() {
-        return photo;
+        return mPhoto;
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo;
+        this.mPhoto = photo;
     }
 
     public String getThumb() {
-        return thumb;
+        return mThumb;
     }
 
     public void setThumb(String thumb) {
-        this.thumb = thumb;
+        this.mThumb = thumb;
     }
 
     public String getPhotoCaption() {
-        return photoCaption;
+        return mPhotoCaption;
     }
 
     public void setPhotoCaption(String photoCaption) {
-        this.photoCaption = photoCaption;
+        this.mPhotoCaption = photoCaption;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsImage{" +
+                "mPhoto='" + mPhoto + '\'' +
+                ", mThumb='" + mThumb + '\'' +
+                ", mPhotoCaption='" + mPhotoCaption + '\'' +
+                '}';
     }
 }
 

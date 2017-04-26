@@ -1,4 +1,4 @@
-package com.example.panzhiev.complexjsonparseretrofitrx.Utils;
+package com.example.panzhiev.complexjsonparseretrofitrx.utils;
 
 /**
  * Created by Panzhiev on 24.04.2017.

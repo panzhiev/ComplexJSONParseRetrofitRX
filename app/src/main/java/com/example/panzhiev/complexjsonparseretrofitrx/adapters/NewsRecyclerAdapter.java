@@ -12,7 +12,6 @@ import com.example.panzhiev.complexjsonparseretrofitrx.R;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.NewsItem;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     private Context mContext;
     private List<NewsItem> mNewsItems;
 
-    public NewsRecyclerAdapter(Context context, ArrayList newsItems) {
+    public NewsRecyclerAdapter(Context context, List<NewsItem> newsItems) {
         this.mContext = context;
         this.mNewsItems = newsItems;
     }
@@ -47,10 +46,18 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         final NewsItem newsItem = (NewsItem) mNewsItems.get(position);
 
         holder.tvName.setText(newsItem.getHeadLine());
-        Picasso.with(holder.imageView.getContext())
-                .load(newsItem.getNewsImage().getPhoto())
-                .placeholder(R.mipmap.ic_launcher)
-                .into(holder.imageView);
+
+        try {
+            Picasso.with(mContext)
+                    .load(newsItem.getNewsImage().getThumb())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(holder.imageView);
+        } catch (Exception e) {
+            Picasso.with(mContext)
+                    .load("http://s7.favim.ru/orig/151008/emotsija-jumor-korporatsija-monstrov-kartinka-Favim.ru-3407447.jpg")
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(holder.imageView);
+        }
     }
 
     @Override

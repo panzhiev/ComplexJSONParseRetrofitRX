@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.example.panzhiev.complexjsonparseretrofitrx.adapters.NewsRecyclerAdapter;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.ListOfNewsItems;
 import com.example.panzhiev.complexjsonparseretrofitrx.model.NewsItem;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     List<NewsItem> mNewsItems;
     NewsRecyclerAdapter adapter;
+    Gson gson = new GsonBuilder().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
 
-        adapter = new NewsRecyclerAdapter(this, (ArrayList) mNewsItems);
+        adapter = new NewsRecyclerAdapter(this, mNewsItems);
         mRecyclerView.setAdapter(adapter);
     }
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button_get_data:
                 query();
+                mRecyclerView.getAdapter().notifyDataSetChanged();
                 break;
             default:
                 break;
@@ -87,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(LOG_TAG, listNewsItems.toString() + " response NewsItems");
 
                         mNewsItems = listNewsItems.getNewsItem();
-                        adapter.notifyDataSetChanged();
+                        adapter = new NewsRecyclerAdapter(MainActivity.this, mNewsItems);
+                        mRecyclerView.setAdapter(adapter);
 
                         for (NewsItem newsItem : mNewsItems){
                             Log.d(LOG_TAG, newsItem.getHeadLine());

@@ -30,4 +30,11 @@ public class ListOfNewsItems {
         this.newsItems = newsItems;
     }
 
+    @Override
+    public String toString() {
+        return "ListOfNewsItems{" +
+                "pagination=" + pagination +
+                ", newsItems=" + newsItems +
+                '}';
+    }
 }
