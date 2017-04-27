@@ -1,5 +1,6 @@
 package com.example.panzhiev.complexjsonparseretrofitrx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         adapter = new NewsRecyclerAdapter(this, mNewsItems);
         mRecyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -59,9 +61,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 query();
                 mRecyclerView.getAdapter().notifyDataSetChanged();
                 break;
+            case R.id.card_view_item:
+                showCurentNews();
+                break;
             default:
                 break;
         }
+    }
+
+    private void showCurentNews() {
+
+        Intent intent = new Intent(MainActivity.this, ShowCurrentNews.class);
+        startActivity(intent);
     }
 
     private void query() {
